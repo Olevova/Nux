@@ -1,12 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config({ quiet: true });
 
-/** Fixed entry point for the language portal; not affected by BASE_URL / baseURL. */
 export const WIKIPEDIA_PORTAL_URL = "https://www.wikipedia.org/";
 
-/** Browser locale for the whole run, so the portal's personalised "Top languages"
- *  list contains Ukrainian in every environment (local, CI, Docker), not just on
- *  a machine whose OS/browser locale happens to be Ukrainian. */
 export const BROWSER_LOCALE = "uk-UA";
 
 export function getBaseUrl(): string {
