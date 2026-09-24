@@ -1,0 +1,20 @@
+services:
+  playwright-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Values come from ./.env by default (Compose auto-loads it for ${...} substitution below).
+    # Override per run without touching any file, e.g.:
+    #   WIKI_USERNAME=Other WIKI_PASSWORD=Other docker compose up --build
+    # or point at a different credentials file entirely:
+    #   docker compose --env-file .env.other up --build
+    environment:
+      BASE_URL: ${BASE_URL}
+      WIKI_USERNAME: ${WIKI_USERNAME}
+      WIKI_PASSWORD: ${WIKI_PASSWORD}
+    volumes:
+      # HTML report — after the run, open ./playwright-report/index.html on the host.
+      # The mount makes the report land on the host instead of staying inside the container.
+      - ./playwright-report:/app/playwright-report
+      # Screenshots / videos / traces captured on failure
+      - ./test-results:/app/test-results
